@@ -55,7 +55,7 @@ public class Ruhmatrennid {
         }return true;
     }
 
-    public boolean lisatrenni(Klient klient){
+    public boolean lisatrenni(Klient klient, String misRühmatrenn){
         if(kasOnVabu(trenn)==false)
             return false;
         switch (trenn) {
