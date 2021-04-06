@@ -2,13 +2,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ruhmatrennid {
-    private int zumbakohtadearv=0;
-    private int joogakohtadearv=0;
-    private int bodybumpikohtadearv=0;
+    private int zumbakohtadearv;
+    private int joogakohtadearv;
+    private int bodybumpikohtadearv;
     private String trenn;
     private List<Klient> zumbanimekiri= new ArrayList<>();
     private List<Klient> jooganimekiri= new ArrayList<>();
     private List<Klient> bodypumpinimekiri= new ArrayList<>();
+
 
     public int getZumbakohtadearv() {
         return zumbakohtadearv;
@@ -43,19 +44,21 @@ public class Ruhmatrennid {
     }
 
     public boolean kasOnVabu(String trenn){
-        if(trenn=="j"){
-            if(getJoogakohtadearv()==0)
+        if(trenn.equals("j")){
+            if(joogakohtadearv==0)
                 return false;
-        }else if(trenn=="z"){
-            if(getZumbakohtadearv()==0)
+        }else if(trenn.equals("z")){
+            if(zumbakohtadearv==0)
                 return false;
-        }else if(trenn=="b"){
-            if(getBodybumpikohtadearv()==0)
-                return false;
+        }else if(trenn.equals("b")){
+            if(getBodybumpikohtadearv()==0){
+                System.out.println(getBodybumpikohtadearv());
+                System.out.println(bodybumpikohtadearv);
+                return false;}
         }return true;
     }
 
-    public boolean lisatrenni(Klient klient, String misRühmatrenn){
+    public boolean lisatrenni(Klient klient, String trenn){
         if(kasOnVabu(trenn)==false)
             return false;
         switch (trenn) {
@@ -78,6 +81,7 @@ public class Ruhmatrennid {
                         break;
                     }
             }return true;
+
         }
 
     }

@@ -5,9 +5,8 @@ public class Test {
 
     public static void main(String[] args) {
 
-
         Ruhmatrennid ruhmatrennid = new Ruhmatrennid(""); //Määrame randomiga rühmatrennide kohtade arvu
-        ruhmatrennid.setBodybumpikohtadearv(ruhmatrennid.kohtadearv());
+        ruhmatrennid.setBodybumpikohtadearv(1);
         ruhmatrennid.setJoogakohtadearv(ruhmatrennid.kohtadearv());
         ruhmatrennid.setZumbakohtadearv(ruhmatrennid.kohtadearv());
         boolean saabtrenni = false;
@@ -59,7 +58,6 @@ public class Test {
                     }
                 }
 
-
                     String kasLopetame = JOptionPane.showInputDialog(null,
                             "Kui soovid veel inimesi trenni lisada kirjuta 'v' kui soovid lõpetada kirjuta 'l' ",
                             "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
@@ -74,15 +72,15 @@ public class Test {
                         String misRuhmatrenni = JOptionPane.showInputDialog(null,
                                 "Kui soovid minna Zumbasse kirjuta 'z', kui Bodypumpi kirjuta 'b', kui joogasse kirjuta 'j'",
                                 "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
-                        Ruhmatrennid ruhmatrennid2 = new Ruhmatrennid(misRuhmatrenni);
-                        saabtrenni = ruhmatrennid2.lisatrenni(uusklient, misRuhmatrenni);
+                       // Ruhmatrennid ruhmatrennid2 = new Ruhmatrennid(misRuhmatrenni);
+                        saabtrenni = ruhmatrennid.lisatrenni(uusklient, misRuhmatrenni);
+
                         if (saabtrenni == false) {
                             String kasKuhugiMujale = JOptionPane.showInputDialog(null,
                                     "Kahjuks on see trenn täis, kui soovid kuhugi mujale minna kirjuta 'm', kui ei soovi kirjuta 'e'",
                                     "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
                             if (kasKuhugiMujale.equals("e")) {
-                                System.out.println("Peatse kohtumiseni!");
-                                System.exit(0);
+                                break;
                             }
                         }
                     }
@@ -96,10 +94,11 @@ public class Test {
                         }
                     }
 
-
                     String kasLopetame = JOptionPane.showInputDialog(null,
                             "Kui soovid veel inimesi trenni lisada kirjuta 'v' kui soovid lõpetada kirjuta 'l' ",
                             "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
+                    if (kasLopetame.equals("v"))
+                        saabtrenni=false;
 
                     System.out.println("Tasuda tuleb sul " + summa + " €");
                     if (kasLopetame.equals("l"))
