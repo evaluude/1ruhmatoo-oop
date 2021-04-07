@@ -1,5 +1,6 @@
 import javax.swing.JOptionPane;
-import java.util.Arrays;
+import java.util.ArrayList;
+
 
 public class Test {
 
@@ -11,6 +12,7 @@ public class Test {
         ruhmatrennid.setZumbakohtadearv(ruhmatrennid.kohtadearv());
         boolean saabtrenni = false;
         int summa = 0;
+        ArrayList<String> andmebaas = new ArrayList<>();
 
         for (int i = 0; ; i++) {    //Kogu programm on tsüklis
             String trenn = JOptionPane.showInputDialog(null,
@@ -26,14 +28,23 @@ public class Test {
             String perenimi = kliendiandmedosadena[1];
             String isikukood = kliendiandmedosadena[2];
 
-            //Kontrolli, kas klient on juba klientide listis isikukoodi järgi, kui ei ole, siis küsi kas tahab kliendiks saada
             Klient uusklient = new Klient(eesnimi, perenimi, isikukood);
-            //if(isikukood ei ole andmebaasis)
-            String kasTahabKliendiks = JOptionPane.showInputDialog(null,
-                    "Sa pole meie andmebaasis, kas soovid hakata kliendiks? Kui jah, kirjuta 'j'",
-                    "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
-            //uusklient.lisalisti
 
+            String kasTahabKliendiks = JOptionPane.showInputDialog(null,
+                    "Kas soovid hakata kliendiks? Kui jah, kirjuta 'j', kui ei kirjuta 'e'",
+                    "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
+            if (kasTahabKliendiks.equals("j")) {                   //Kui tahab kliendiks ja ei ole andmebaasis, siis lisab hinnale kuupileti
+                if (!andmebaas.contains(uusklient.getIsikukood())) {
+                    andmebaas.add(uusklient.getIsikukood());
+                    summa += 30;
+
+                } else {
+                    JOptionPane.showMessageDialog(null,  //Kui inimene on juba klubiliige, siis hinnale kuupiletit ei lisandu
+                            "Oled juba klubiliige!",
+                            "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
+                    summa += 0;
+                }
+            }
 
             if (trenn.equals("j")) {        //kui inimene tahab jõusaali minna
                 String kava = JOptionPane.showInputDialog(null,
@@ -46,66 +57,70 @@ public class Test {
                     String jousaaliKava = jousaal.randomTreeningkava();
                     System.out.println("Treeningkavaks saad sa: " + jousaaliKava);
                 }
+                if (andmebaas.contains(uusklient.getIsikukood())) {
+                    summa += 0;
 
-                if (kasTahabKliendiks.equals("j")){       //kui inimene tahab saada kliendiks, siis lisame hinnale kuupileti
-                    summa+=30;
-                }
-                else {
+                } else {
                     if (uusklient.kasTaiskasvanu(uusklient.getIsikukood())) {   //kui ei taha kliendiks siis vastavalt vanusele lisame hinnale ühekorrapileti
                         summa += 5;
-                    } else{
+                    } else {
                         summa += 3;
                     }
                 }
 
-                    String kasLopetame = JOptionPane.showInputDialog(null,
-                            "Kui soovid veel inimesi trenni lisada kirjuta 'v' kui soovid lõpetada kirjuta 'l' ",
+                String kasLopetame = JOptionPane.showInputDialog(null,
+                        "Kui soovid veel inimesi trenni lisada kirjuta 'v' kui soovid lõpetada kirjuta 'l' ",
+                        "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
+                JOptionPane.showMessageDialog(null,
+                        "Tasuda tuleb: " + summa + " €",
+                        "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
+                if (kasLopetame.equals("l"))
+                    System.exit(0);
+
+
+            } else if (trenn.equals("r")) {     //kui inimene tahab rühmatrenni minna
+                while (saabtrenni == false) {       //tee nii kaua kui trennis vabu kohti
+                    String misRuhmatrenni = JOptionPane.showInputDialog(null,
+                            "Kui soovid minna Zumbasse kirjuta 'z', kui Bodypumpi kirjuta 'b', kui joogasse kirjuta 'j'",
                             "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
-                    System.out.println("Tasuda tuleb sul " + summa + " €");
-                    if (kasLopetame.equals("l"))
-                        System.exit(0);
+                    saabtrenni = ruhmatrennid.lisatrenni(uusklient, misRuhmatrenni);
 
-
-
-                } else if (trenn.equals("r")) {     //kui inimene tahab rühmatrenni minna
-                    while (saabtrenni == false) {       //tee nii kaua kui trennis vabu kohti
-                        String misRuhmatrenni = JOptionPane.showInputDialog(null,
-                                "Kui soovid minna Zumbasse kirjuta 'z', kui Bodypumpi kirjuta 'b', kui joogasse kirjuta 'j'",
+                    if (saabtrenni == false) {
+                        String kasKuhugiMujale = JOptionPane.showInputDialog(null,
+                                "Kahjuks on see trenn täis, kui soovid kuhugi mujale minna kirjuta 'm', kui ei soovi kirjuta 'e'",
                                 "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
-                       // Ruhmatrennid ruhmatrennid2 = new Ruhmatrennid(misRuhmatrenni);
-                        saabtrenni = ruhmatrennid.lisatrenni(uusklient, misRuhmatrenni);
-
-                        if (saabtrenni == false) {
-                            String kasKuhugiMujale = JOptionPane.showInputDialog(null,
-                                    "Kahjuks on see trenn täis, kui soovid kuhugi mujale minna kirjuta 'm', kui ei soovi kirjuta 'e'",
-                                    "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
-                            if (kasKuhugiMujale.equals("e")) {
-                                break;
-                            }
+                        if (kasKuhugiMujale.equals("e")) {
+                            break;
                         }
                     }
-                    if (kasTahabKliendiks.equals("j")) {
+                }
+                if (kasTahabKliendiks.equals("j")) {              //Rühmatrennide hindade arvutamine
+                    if (!andmebaas.contains(uusklient.getIsikukood())) {
+                        andmebaas.add(uusklient.getIsikukood());
                         summa += 30;
-                    } else {
-                        if (uusklient.kasTaiskasvanu(uusklient.getIsikukood())) {
-                            summa += 8;
-                        } else {
-                            summa += 5;
-                        }
                     }
-
-                    String kasLopetame = JOptionPane.showInputDialog(null,
-                            "Kui soovid veel inimesi trenni lisada kirjuta 'v' kui soovid lõpetada kirjuta 'l' ",
-                            "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
-                    if (kasLopetame.equals("v"))
-                        saabtrenni=false;
-
-                    System.out.println("Tasuda tuleb sul " + summa + " €");
-                    if (kasLopetame.equals("l"))
-                        System.exit(0);
+                } else {
+                    if (uusklient.kasTaiskasvanu(uusklient.getIsikukood())) {
+                        summa += 8;
+                    } else {
+                        summa += 5;
+                    }
 
                 }
+
+                String kasLopetame = JOptionPane.showInputDialog(null,
+                        "Kui soovid veel inimesi trenni lisada kirjuta 'v' kui soovid lõpetada kirjuta 'l' ",
+                        "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
+                if (kasLopetame.equals("v"))
+                    saabtrenni = false;
+
+                JOptionPane.showMessageDialog(null,
+                        "Tasuda tuleb:" + summa + " €",
+                        "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
+                if (kasLopetame.equals("l"))
+                    System.exit(0);
             }
         }
     }
+}
 
