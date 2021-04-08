@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Jousaal {
     final String kava1 =
-            "Surumine kangiga lamades\t                   3 x 8 - 10\t\n" +
+            "Surumine kangiga lamades\t                           3 x 8 - 10\t\n" +
                     "Lendamine küljele trenazööril                3 x 8 - 10\t\n" +
                     "Ületõmme hantliga (pullover)\t               3 x 8 - 10\t\n" +
                     "Küünarvarte sirutamine trenazööril\t         3 x 8 - 10\t\n" +
@@ -77,13 +77,6 @@ public class Jousaal {
         return ((int) (Math.random() * 20)) + 10;
     }
 
-    public boolean kasOnVabu(String trenn) {
-        if (trenn == "j") {
-            if (getJousaaliKohtadearv() == 0)
-                return false;
-        }
-        return true;
-    }
 
     public String randomTreeningkava() {
         Random number = new Random();
