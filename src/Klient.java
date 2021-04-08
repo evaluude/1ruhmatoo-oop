@@ -1,6 +1,8 @@
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Klient {
 
@@ -33,6 +35,7 @@ public class Klient {
         this.isikukood = isikukood;
 
     }
+
 
     public Boolean kasTaiskasvanu(String isikukood) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");

@@ -5,7 +5,6 @@ public class Ruhmatrennid {
     private int zumbakohtadearv;
     private int joogakohtadearv;
     private int bodybumpikohtadearv;
-    private String trenn;
     private List<Klient> zumbanimekiri = new ArrayList<>();
     private List<Klient> jooganimekiri = new ArrayList<>();
     private List<Klient> bodypumpinimekiri = new ArrayList<>();
@@ -36,7 +35,6 @@ public class Ruhmatrennid {
     }
 
     public Ruhmatrennid(String trenn) {
-        this.trenn = trenn;
     }
 
     public int kohtadearv() {
@@ -45,21 +43,17 @@ public class Ruhmatrennid {
 
     public boolean kasOnVabu(String trenn) {
         if (trenn.equals("j")) {
-            if (joogakohtadearv == 0)
-                return false;
+            return joogakohtadearv != 0;
         } else if (trenn.equals("z")) {
-            if (zumbakohtadearv == 0)
-                return false;
+            return zumbakohtadearv != 0;
         } else if (trenn.equals("b")) {
-            if (bodybumpikohtadearv == 0) {
-                return false;
-            }
+            return bodybumpikohtadearv != 0;
         }
         return true;
     }
 
     public boolean lisatrenni(Klient klient, String trenn) {
-        if (kasOnVabu(trenn) == false)
+        if (!kasOnVabu(trenn))
             return false;
         switch (trenn) {
             case "z":
