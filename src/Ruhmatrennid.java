@@ -6,9 +6,9 @@ public class Ruhmatrennid {
     private int joogakohtadearv;
     private int bodybumpikohtadearv;
     private String trenn;
-    private List<Klient> zumbanimekiri= new ArrayList<>();
-    private List<Klient> jooganimekiri= new ArrayList<>();
-    private List<Klient> bodypumpinimekiri= new ArrayList<>();
+    private List<Klient> zumbanimekiri = new ArrayList<>();
+    private List<Klient> jooganimekiri = new ArrayList<>();
+    private List<Klient> bodypumpinimekiri = new ArrayList<>();
 
 
     public int getZumbakohtadearv() {
@@ -39,50 +39,51 @@ public class Ruhmatrennid {
         this.trenn = trenn;
     }
 
-    public int kohtadearv(){
-        return ((int)(Math.random()*20))+10;
+    public int kohtadearv() {
+        return ((int) (Math.random() * 20)) + 10;
     }
 
-    public boolean kasOnVabu(String trenn){
-        if(trenn.equals("j")){
-            if(joogakohtadearv==0)
+    public boolean kasOnVabu(String trenn) {
+        if (trenn.equals("j")) {
+            if (joogakohtadearv == 0)
                 return false;
-        }else if(trenn.equals("z")){
-            if(zumbakohtadearv==0)
+        } else if (trenn.equals("z")) {
+            if (zumbakohtadearv == 0)
                 return false;
-        }else if(trenn.equals("b")){
-            if(getBodybumpikohtadearv()==0){
-                System.out.println(getBodybumpikohtadearv());
-                System.out.println(bodybumpikohtadearv);
-                return false;}
-        }return true;
+        } else if (trenn.equals("b")) {
+            if (bodybumpikohtadearv == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    public boolean lisatrenni(Klient klient, String trenn){
-        if(kasOnVabu(trenn)==false)
+    public boolean lisatrenni(Klient klient, String trenn) {
+        if (kasOnVabu(trenn) == false)
             return false;
         switch (trenn) {
-                case "z":
-                    if(zumbakohtadearv!=0){
-                        zumbanimekiri.add(klient);
-                        zumbakohtadearv-=1;
-                        break;
-                    }
-                case "b":
-                    if(bodybumpikohtadearv!=0){
-                       bodypumpinimekiri.add(klient);
-                        bodybumpikohtadearv-=1;
-                        break;
-                    }
-                case "j":
-                    if(joogakohtadearv!=0){
-                        jooganimekiri.add(klient);
-                        joogakohtadearv-=1;
-                        break;
-                    }
-            }return true;
-
+            case "z":
+                if (zumbakohtadearv != 0) {
+                    zumbanimekiri.add(klient);
+                    zumbakohtadearv -= 1;
+                    break;
+                }
+            case "b":
+                if (bodybumpikohtadearv != 0) {
+                    bodypumpinimekiri.add(klient);
+                    bodybumpikohtadearv -= 1;
+                    break;
+                }
+            case "j":
+                if (joogakohtadearv != 0) {
+                    jooganimekiri.add(klient);
+                    joogakohtadearv -= 1;
+                    break;
+                }
         }
+        return true;
 
     }
+
+}
 

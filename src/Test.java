@@ -7,7 +7,7 @@ public class Test {
     public static void main(String[] args) {
 
         Ruhmatrennid ruhmatrennid = new Ruhmatrennid(""); //Määrame randomiga rühmatrennide kohtade arvu
-        ruhmatrennid.setBodybumpikohtadearv(1);
+        ruhmatrennid.setBodybumpikohtadearv(ruhmatrennid.kohtadearv());
         ruhmatrennid.setJoogakohtadearv(ruhmatrennid.kohtadearv());
         ruhmatrennid.setZumbakohtadearv(ruhmatrennid.kohtadearv());
         boolean saabtrenni = false;

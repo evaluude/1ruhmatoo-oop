@@ -40,7 +40,7 @@ public class Jousaal {
             "Jalgade tõsted kaldpingil\t3x12-15\n";
 
     private int jousaaliKohtadearv = 0;
-    private List<Klient> jousaaliNimekiri= new ArrayList<>();
+    private List<Klient> jousaaliNimekiri = new ArrayList<>();
 
     public Jousaal() {
     }
@@ -73,22 +73,23 @@ public class Jousaal {
         this.jousaaliNimekiri = jousaaliNimekiri;
     }
 
-    public int kohtadearv(){
-        return ((int)(Math.random()*20))+10;
+    public int kohtadearv() {
+        return ((int) (Math.random() * 20)) + 10;
     }
 
-    public boolean kasOnVabu(String trenn){
-        if(trenn=="j"){
-            if(getJousaaliKohtadearv()==0)
+    public boolean kasOnVabu(String trenn) {
+        if (trenn == "j") {
+            if (getJousaaliKohtadearv() == 0)
                 return false;
-        }return true;
+        }
+        return true;
     }
 
-    public String randomTreeningkava(){
+    public String randomTreeningkava() {
         Random number = new Random();
-        int kava = number.nextInt(3-1) + 1;
-        if(kava == 1) return kava1;
-        if(kava == 2) return kava2;
+        int kava = number.nextInt(3 - 1) + 1;
+        if (kava == 1) return kava1;
+        if (kava == 2) return kava2;
         else return kava3;
     }
 }
