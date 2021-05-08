@@ -1,0 +1,6 @@
+Klientide isikukoodid: 
+60004212714
+60007211221
+Bodypumpi kohtade arv:18, Bodypumpi vabade kohtade arv:17
+Zumba kohtade arv:14, Zumba vabade kohtade arv:14
+Jooga kohtade arv:19, Jooga vabade kohtade arv:18
