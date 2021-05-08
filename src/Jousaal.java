@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Jousaal {
-    final String kava1 =
+    private final String kava1 =
             "Surumine kangiga lamades\t                           3 x 8 - 10\t\n" +
                     "Lendamine küljele trenazööril                3 x 8 - 10\t\n" +
                     "Ületõmme hantliga (pullover)\t               3 x 8 - 10\t\n" +
@@ -14,7 +14,7 @@ public class Jousaal {
                     "Pöiasirutus trenazööril seistes\t            3 x 8 - 10\t\n" +
                     "Keresirutus horisontaalsel alaseljapingil\t  3 x 10 - 12\t\n" +
                     "Jalgade tõsted kaldpinnal\t                  3 x max\n";
-    final String kava2 =
+    private final String kava2 =
             "Sörkjooks 1,5 min\t\t\n" +
                     "30 sek sprinti\t\t\n" +
                     "Surumine kangiga lamades\t1x10-12\t\n" +
@@ -30,7 +30,7 @@ public class Jousaal {
                     "Väljaaste, hantlid käes\t1x12\t\n" +
                     "Küünarvarte kõverdamine kangiga seistes\t1x12\n" +
                     "\n";
-    final String kava3 = "Surumine smithi masinal istudes\t1X15(sooj), 1x 12(sooj), 1x8-10\t\n" +
+    private final String kava3 = "Surumine smithi masinal istudes\t1X15(sooj), 1x 12(sooj), 1x8-10\t\n" +
             "Lendamine hantlitega küljele istudes\t1x 12(sooj), 1x8-10\t\n" +
             "Käe küljele tõste plokksüsteemil (Lendamine küljele plokil)\t1x20(sooj), 1x8-10\t\n" +
             "Õlatõste hantlitega seistes\t1x12(sooj), 1x10-12\t\n" +

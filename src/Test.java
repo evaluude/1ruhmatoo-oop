@@ -1,4 +1,6 @@
 import javax.swing.JOptionPane;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +10,29 @@ public class Test {
     public static void main(String[] args) {
 
         Ruhmatrennid ruhmatrennid = new Ruhmatrennid(""); //Määrame randomiga rühmatrennide kohtade arvu
-        ruhmatrennid.setBodybumpikohtadearv(ruhmatrennid.kohtadearv()); //Määrame randomiga rühmatrennide kohtade arvu
-        ruhmatrennid.setJoogakohtadearv(ruhmatrennid.kohtadearv());
-        ruhmatrennid.setZumbakohtadearv(ruhmatrennid.kohtadearv());
+        int algnebodypumpkohad=ruhmatrennid.kohtadearv();
+        int algnezumbakohad=ruhmatrennid.kohtadearv();
+        int algnejoogakohad=ruhmatrennid.kohtadearv();
+        ruhmatrennid.setBodybumpikohtadearv(algnebodypumpkohad); //Määrame randomiga rühmatrennide kohtade arvu
+        ruhmatrennid.setJoogakohtadearv(algnejoogakohad);
+        ruhmatrennid.setZumbakohtadearv(algnezumbakohad);
         boolean saabtrenni = false;
         List<String> andmebaas = new ArrayList<>();
+        try(BufferedReader in =new BufferedReader(new InputStreamReader
+                (new FileInputStream("andmebaas.txt"), StandardCharsets.UTF_8))){
+            String rida;
+            while((rida=in.readLine())!=null) {
+                andmebaas.add(rida.strip());
+            }
+        } catch(IOException e){
+            System.out.println("Viga");
+            e.printStackTrace();
+            }
+        for (String andmed:andmebaas) {
+            System.out.println(andmed);
+        }
 
-        for (int i = 0; ; i++) {    //Kogu programm on tsüklis
+        while(true) {    //Kogu programm on tsüklis
             int summa = 0;
             int kuieilahetrennisumma = 1;
             String trenn = JOptionPane.showInputDialog(null,
@@ -102,9 +120,27 @@ public class Test {
                     "Tasuda tuleb:" + summa + " €",
                     "Tere tulemast spordiklubisse!", JOptionPane.QUESTION_MESSAGE);
             if (kasLopetame.equals("l"))
-                System.exit(0);
+                break;
+        }
+        try{
+            FileWriter kirjutab=new FileWriter("trenniinfo.txt");
+            kirjutab.write("Klientide isikukoodid: "+System.lineSeparator());
+            for (String andmed : andmebaas) {
+                kirjutab.write(andmed+ System.lineSeparator());
+            }
+            kirjutab.write("Bodypumpi kohtade arv:"+algnebodypumpkohad+", ");
+            kirjutab.write("Bodypumpi vabade kohtade arv:"+ruhmatrennid.getBodybumpikohtadearv()+System.lineSeparator());
+            kirjutab.write("Zumba kohtade arv:"+algnezumbakohad+", ");
+            kirjutab.write("Zumba vabade kohtade arv:"+ruhmatrennid.getZumbakohtadearv()+System.lineSeparator());
+            kirjutab.write("Jooga kohtade arv:"+algnejoogakohad+", ");
+            kirjutab.write("Jooga vabade kohtade arv:"+ruhmatrennid.getJoogakohtadearv());
+            kirjutab.close();
+        }catch (IOException e){
+            System.out.println("Viga");
+            e.printStackTrace();
         }
     }
-
 }
+
+
 
